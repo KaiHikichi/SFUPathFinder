@@ -18,12 +18,12 @@ class Node:
     
     def addEdge(self, edge: Edge):
         #append edge to self and to other node
-        #edge should be appended such that edge.node1 == self
-        if edge.node1 == self:
+        #edge should be appended such that edge.homeNode == self
+        if edge.homeNode == self:
             self.edges.append(edge)
 
-        elif edge.node2 == self:
-            tempEdge: Edge = Edge(edge.node2, edge.node1, edge.cost)
+        elif edge.destNode == self:
+            tempEdge: Edge = Edge(edge.destNode, edge.homeNode, edge.cost)
             self.edges.append(tempEdge)
 
         else:
@@ -37,18 +37,18 @@ class Node:
 
 class Edge:
     """
-    node1: Node
-    node2: Node
+    homeNode: Node
+    destNode: Node
     cost: float
     """
-    def __init__(self, node1: Node, node2: Node, cost: float):
-        self.node1 = node1
-        self.node2 = node2
+    def __init__(self, homeNode: Node, destNode: Node, cost: float):
+        self.homeNode = homeNode
+        self.destNode = destNode
         self.cost = cost
         pass
 
     def __str__(self):
-        return f"{self.node1.name} - {self.node2.name} : {self.cost}"
+        return f"{self.homeNode.name} - {self.destNode.name} : {self.cost}"
 
 
 class NodeMap:
@@ -66,16 +66,16 @@ class NodeMap:
         #connect all edges of node to map
         for edge in node.edges[:]:
             
-            assert(edge.node1 == node)
+            assert(edge.homeNode == node)
 
             #find target node in nodes dict
             #if not there then throw KeyError
-            if edge.node2.name in self.nodes:
-                targetNode: Node = self.nodes[edge.node2.name]
+            if edge.destNode.name in self.nodes:
+                targetNode: Node = self.nodes[edge.destNode.name]
                 targetNode.addEdge(edge)
 
             else:
-                print(f"Key not found: {edge.node2.name}")
+                print(f"Key not found: {edge.destNode.name}")
                 node.edges.remove(edge)
         pass
 
@@ -172,6 +172,13 @@ def loadNodes(fileName: str, map: NodeMap):
         #add node to map
         map.addNode(newNode)
     pass
+
+def A_Star(start: Node, goal: Node):
+    path: list[Node] = list()
+    cost: float = 0
+
+    return path, cost
+
 
 
 
