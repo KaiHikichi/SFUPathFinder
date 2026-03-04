@@ -1,5 +1,0 @@
-Node                Edges
-==========================================================
-ASB Entrance        (CS Common room, 1), (AQ SE, 1.5)
-CS Common Room      (ASB Entrance, 1)
-AQ SE               (ASB Entrance, 1.5)

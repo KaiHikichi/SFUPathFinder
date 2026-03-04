@@ -1,0 +1,46 @@
+{
+    "nodes": [
+        {
+            "name": "CS Common Room",
+            "edges": [
+                {
+                    "name": "ASB Entrance",
+                    "cost": 1
+                }
+            ]
+        },
+        {
+            "name": "ASB Entrance",
+            "edges": [
+                {
+                    "name": "CS Common Room",
+                    "cost": 1
+                },
+                {
+                    "name": "AQ SE",
+                    "cost": 1.5
+                }
+            ]
+        },
+        {
+            "name": "AQ SE",
+            "edges": [
+                {
+                    "name": "ASB Entrance",
+                    "cost": 1.5
+                }
+            ]
+        },
+        {
+            "name": "AQ NE",
+            "edges": [
+                {
+                    "name": "AQ SE",
+                    "cost": 1
+                }
+            ]
+        }
+
+
+    ]
+}
