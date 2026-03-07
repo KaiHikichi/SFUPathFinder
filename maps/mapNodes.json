@@ -28,12 +28,50 @@
                 {
                     "name": "ASB Entrance",
                     "cost": 1.5
+                },
+                {
+                    "name": "AQ SW",
+                    "cost": 1
+                },
+                {
+                    "name": "AQ NE",
+                    "cost": 1
                 }
             ]
         },
         {
             "name": "AQ NE",
             "edges": [
+                {
+                    "name": "AQ SE",
+                    "cost": 1
+                },
+                {
+                    "name": "AQ NW",
+                    "cost": 1
+                }
+            ]
+        },
+        {
+            "name": "AQ NW",
+            "edges": [
+                {
+                    "name": "AQ NE",
+                    "cost": 1
+                },
+                {
+                    "name": "AQ SW",
+                    "cost": 1
+                }
+            ]
+        },
+        {
+            "name": "AQ SW",
+            "edges": [
+                {
+                    "name": "AQ NW",
+                    "cost": 1
+                },
                 {
                     "name": "AQ SE",
                     "cost": 1
