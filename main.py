@@ -257,5 +257,5 @@ def buildPath(path: list[Node], FE: FringeElement):
 
 
 
-
-main()      
+if __name__ == "__main__":
+    main()      

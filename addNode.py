@@ -93,5 +93,5 @@ def writeToJSON(fileName: str, name: str, long: float, lat: float, edges):
 
 
 
-
-main()
+if __name__ == "__main__":
+    main()
