@@ -2,79 +2,108 @@
     "nodes": [
         {
             "name": "CS Common Room",
+            "long": 49.27721166258463, 
+            "lat": -122.9140499574846,
             "edges": [
                 {
                     "name": "ASB Entrance",
-                    "cost": 1
+                    "cost": 1,
+                    "isIndoor": true
                 }
             ]
         },
+
         {
             "name": "ASB Entrance",
+            "long": 49.27769028134071, 
+            "lat": -122.91407547509968,
             "edges": [
                 {
                     "name": "CS Common Room",
-                    "cost": 1
+                    "cost": 1,
+                    "isIndoor": true
                 },
                 {
                     "name": "AQ SE",
-                    "cost": 1.5
+                    "cost": 1.5,
+                    "isIndoor": true
                 }
             ]
         },
+
         {
             "name": "AQ SE",
+            "long": 49.27827918414656, 
+            "lat": -122.915944640456,
             "edges": [
                 {
                     "name": "ASB Entrance",
-                    "cost": 1.5
+                    "cost": 1.5,
+                    "isIndoor": true
                 },
                 {
                     "name": "AQ SW",
-                    "cost": 1
+                    "cost": 1,
+                    "isIndoor": true
                 },
                 {
                     "name": "AQ NE",
-                    "cost": 1
+                    "cost": 1,
+                    "isIndoor": true
                 }
             ]
         },
+
         {
             "name": "AQ NE",
+            "long": 49.279317550398964, 
+            "lat": -122.91555549682886,
             "edges": [
                 {
                     "name": "AQ SE",
-                    "cost": 1
+                    "cost": 1,
+                    "isIndoor": true
                 },
                 {
                     "name": "AQ NW",
-                    "cost": 1
+                    "cost": 1,
+                    "isIndoor": true
                 }
             ]
         },
+
         {
             "name": "AQ NW",
+            "long": 49.279572595548174, 
+            "lat": -122.91704461488418,
             "edges": [
                 {
                     "name": "AQ NE",
-                    "cost": 1
+                    "cost": 1,
+                    "isIndoor": true
                 },
                 {
                     "name": "AQ SW",
-                    "cost": 1
+                    "cost": 1,
+                    "isIndoor": true
                 }
             ]
         },
+
         {
             "name": "AQ SW",
+            "long": 49.27852174923896, 
+            "lat": -122.9174688452362,
             "edges": [
                 {
                     "name": "AQ NW",
-                    "cost": 1
+                    "cost": 1,
+                    "isIndoor": true
                 },
                 {
                     "name": "AQ SE",
-                    "cost": 1
+                    "cost": 1,
+                    "isIndoor": true
                 }
             ]
         }

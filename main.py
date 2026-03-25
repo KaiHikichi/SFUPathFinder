@@ -7,11 +7,15 @@ class Node:
     name: str
     edges: list[Edge]
     h: float
+    long: float
+    lat: float
     """
-    def __init__(self, name: str):
+    def __init__(self, name: str, long: float, lat: float):
         self.name = name
         self.edges: list[Edge] = list()
-        self.h = self.calcHeuristic()
+        self.h = 0
+        self.long = long
+        self.lat = lat
         pass
 
     def __str__(self):
@@ -25,7 +29,7 @@ class Node:
             self.edges.append(edge)
 
         elif edge.destNode == self:
-            tempEdge: Edge = Edge(edge.destNode, edge.homeNode, edge.cost)
+            tempEdge: Edge = Edge(edge.destNode, edge.homeNode, edge.cost, edge.isIndoor)
             self.edges.append(tempEdge)
 
         else:
@@ -34,7 +38,7 @@ class Node:
         return
 
     def calcHeuristic(self) -> float:
-        return 0
+        self.h = 0
 
 
 class Edge:
@@ -42,11 +46,13 @@ class Edge:
     homeNode: Node
     destNode: Node
     cost: float
+    isIndoor: bool
     """
-    def __init__(self, homeNode: Node, destNode: Node, cost: float):
+    def __init__(self, homeNode: Node, destNode: Node, cost: float, isIndoor: bool):
         self.homeNode = homeNode
         self.destNode = destNode
         self.cost = cost
+        self.isIndoor = isIndoor
         pass
 
     def __str__(self):
@@ -138,9 +144,6 @@ def main():
 
 
 
-
-
-
 #functions=========================================
 
 def setUp(map: NodeMap):
@@ -148,7 +151,7 @@ def setUp(map: NodeMap):
     pass
 
 
-""""returns the json data as a python dict"""
+"""returns the json data as a python dict"""
 def loadJSON(fileName: str):
     try:
         with open(fileName, 'r') as file:
@@ -160,9 +163,13 @@ def loadJSON(fileName: str):
         raise FileNotFoundError
     except json.JSONDecodeError:
         raise json.JSONDecodeError
+
     
 
-"""loads nodes specified in JSON file into map"""
+"""
+    loads nodes specified JSON file into map
+    edges that connect to nodes that are not yet part of the map are ignored
+"""
 def loadNodes(fileName: str, map: NodeMap):
     try:
         data = loadJSON(fileName)
@@ -175,15 +182,16 @@ def loadNodes(fileName: str, map: NodeMap):
     #for each node in JSON add to map
     for node in data["nodes"]:
         #get name
-        newNode: Node = Node(node["name"])
+        newNode: Node = Node(node["name"], node["long"], node["lat"])
 
         #get edges
         for edge in node["edges"]:
             target: str = edge["name"]
             #check if target exists in map
-            if target in map.nodes:
-                newEdge: Edge = Edge(newNode, map.nodes[target], edge["cost"])
-                newNode.edges.append(newEdge)
+            for key in map.nodes:
+                if target.lower() == key.lower():
+                    newEdge: Edge = Edge(newNode, map.nodes[target], edge["cost"], edge["isIndoor"])
+                    newNode.edges.append(newEdge)
 
         #add node to map
         map.addNode(newNode)
