@@ -1,0 +1,29 @@
+{
+    "nodes": [
+        {
+            "name": "A",
+            "long": 0, 
+            "lat": 0,
+            "edges": [
+                {
+                    "name": "B",
+                    "cost": 1,
+                    "isIndoor": false
+                }
+            ]
+        },
+
+        {
+            "name": "B",
+            "long": 0, 
+            "lat": 0,
+            "edges": [
+                {
+                    "name": "A",
+                    "cost": 1,
+                    "isIndoor": false
+                }
+            ]
+        }
+    ]
+}

@@ -1,6 +1,11 @@
 from __future__ import annotations
 import json
+from enum import Enum
 
+class Weather(Enum):
+    CLEAR = 1
+    RAINING = 1.25
+    SNOWY = 1.75
 
 class Node:
     """
@@ -23,7 +28,7 @@ class Node:
         
     
     def addEdge(self, edge: Edge):
-        #append edge to self and to other node
+        #append edge to self
         #edge should be appended such that edge.homeNode == self
         if edge.homeNode == self:
             self.edges.append(edge)
@@ -36,6 +41,16 @@ class Node:
             print(f"Edge does not belong to node: {edge}")
 
         return
+    
+    """
+    Update edge costs based on user weather tolerance and current weather state
+    weatherTolerance: float between 0 and 1, 1 means user does not care about the weather
+    """
+    def updateWeatherCosts(self, weatherTolerance: float, weatherState: Weather):
+        for edge in self.edges:
+            edge: Edge
+            edge.updateWeatherCosts(weatherTolerance, weatherState)
+        pass
 
     def calcHeuristic(self) -> float:
         self.h = 0
@@ -47,12 +62,23 @@ class Edge:
     destNode: Node
     cost: float
     isIndoor: bool
+
+    edges are directed (for a pair of connected nodes, each node has one edge pointing to the other)
     """
     def __init__(self, homeNode: Node, destNode: Node, cost: float, isIndoor: bool):
         self.homeNode = homeNode
         self.destNode = destNode
         self.cost = cost
         self.isIndoor = isIndoor
+        pass
+
+    """
+    Update cost based on user weather tolerance and current weather state
+    weatherTolerance: float between 0 and 1, 1 means user does not care about the weather
+    """
+    def updateWeatherCosts(self, weatherTolerance: float, weatherState: Weather):
+        if (self.isIndoor == False):
+            self.cost = self.cost + (1 - weatherTolerance) * weatherState.value
         pass
 
     def __str__(self):
@@ -78,13 +104,27 @@ class NodeMap:
 
             #find target node in nodes dict
             #if not there then throw KeyError
-            if edge.destNode.name in self.nodes:
+            if edge.destNode.name in self.nodes.keys():
                 targetNode: Node = self.nodes[edge.destNode.name]
                 targetNode.addEdge(edge)
 
             else:
                 print(f"Key not found: {edge.destNode.name}")
                 node.edges.remove(edge)
+        pass
+
+    """
+    Update edge costs based on user weather tolerance and current weather state
+    weatherTolerance: float between 0 and 1, 1 means user does not care about the weather
+    """
+    def updateWeatherCosts(self, weatherTolerance: float, weatherState: Weather):
+        if (weatherTolerance < 0 or weatherTolerance > 1):
+            print("invalid weather tolerance")
+            pass
+
+        for node in self.nodes.values():
+            node: Node
+            node.updateWeatherCosts(weatherTolerance, weatherState)
         pass
 
     def printMap(self):
@@ -112,33 +152,24 @@ class FringeElement:
 
 
 
-
 #main==============================================
 def main():
+    #setup
     map: NodeMap = NodeMap()
+    setUp(map, "maps/mapNodes.json")
 
-    """
-    t1: Node = Node("house")
-    map.addNode(t1)
-
-    t2: Node = Node("school")
-    e1 = Edge(t2, t1, 1)
-    t2.addEdge(e1)
-    map.addNode(t2)
-    """
-
-    setUp(map)
+    #print the map
     print()
     map.printMap()
 
+    #find path and print it
     (path, cost) = A_Star(map.nodes["CS Common Room"], map.nodes["AQ NW"])
-
     for node in path:
         print(node)
-
     print(cost)
 
-    return
+
+    pass
 
 
 
@@ -146,8 +177,8 @@ def main():
 
 #functions=========================================
 
-def setUp(map: NodeMap):
-    loadNodes("maps/mapNodes.json", map)
+def setUp(map: NodeMap, fileName: str):
+    loadNodes(fileName, map)
     pass
 
 
