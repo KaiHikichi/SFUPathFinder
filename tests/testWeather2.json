@@ -1,0 +1,73 @@
+{
+    "nodes": [
+        {
+            "name": "A",
+            "long": 49.27721166258463, 
+            "lat": -122.9140499574846,
+            "edges": [
+                {
+                    "name": "B",
+                    "cost": 0.75,
+                    "isIndoor": false
+                },
+                {
+                    "name": "C",
+                    "cost": 1,
+                    "isIndoor": true
+                }
+            ]
+        },
+
+        {
+            "name": "B",
+            "long": 49.27769028134071, 
+            "lat": -122.91407547509968,
+            "edges": [
+                {
+                    "name": "A",
+                    "cost": 0.75,
+                    "isIndoor": false
+                },
+                {
+                    "name": "D",
+                    "cost": 1,
+                    "isIndoor": true
+                }
+            ]
+        },
+        {
+            "name": "C",
+            "long": 49.27769028134071, 
+            "lat": -122.91407547509968,
+            "edges": [
+                {
+                    "name": "A",
+                    "cost": 1,
+                    "isIndoor": true
+                },
+                {
+                    "name": "D",
+                    "cost": 1,
+                    "isIndoor": true
+                }
+            ]
+        },
+        {
+            "name": "D",
+            "long": 49.27769028134071, 
+            "lat": -122.91407547509968,
+            "edges": [
+                {
+                    "name": "B",
+                    "cost": 1,
+                    "isIndoor": true
+                },
+                {
+                    "name": "C",
+                    "cost": 1,
+                    "isIndoor": true
+                }
+            ]
+        }
+    ]
+}
