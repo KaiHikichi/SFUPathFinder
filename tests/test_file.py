@@ -1,8 +1,7 @@
-from main import NodeMap
-from main import setUp
-from main import A_Star
-from main import Weather
-
+from util import graph
+from util.graph import NodeMap, Weather
+from util.setup import setUp
+from util.search import A_Star
 
 def test_A_Star():
     #setup
