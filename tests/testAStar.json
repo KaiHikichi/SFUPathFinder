@@ -8,7 +8,7 @@
                 {
                     "name": "B",
                     "cost": 0.75,
-                    "isIndoor": false
+                    "isIndoor": true
                 },
                 {
                     "name": "C",
@@ -26,7 +26,7 @@
                 {
                     "name": "A",
                     "cost": 0.75,
-                    "isIndoor": false
+                    "isIndoor": true
                 },
                 {
                     "name": "D",

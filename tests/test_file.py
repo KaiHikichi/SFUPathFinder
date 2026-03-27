@@ -4,6 +4,17 @@ from main import A_Star
 from main import Weather
 
 
+def test_A_Star():
+    #setup
+    map: NodeMap = NodeMap()
+    setUp(map, "tests/testWeather2.json")
+
+    (path, cost) = A_Star(map.nodes["A"], map.nodes["D"])
+
+    assert path[1].name == "B"
+
+    pass
+
 
 def test_updateWeatherCosts_1(): 
 
@@ -23,6 +34,7 @@ def test_updateWeatherCosts_1():
     assert cost == 1 + (1 - weatherTolerance) * Weather.SNOWY.value
 
     pass
+
 
 def test_updateWeatherCosts_2(): 
 
