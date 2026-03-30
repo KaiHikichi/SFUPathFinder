@@ -2,7 +2,7 @@ from util import setup
 from util.setup import loadJSON
 import json
 
-JSONFILE: str = "maps/mapNodes.json"
+JSONFILE: str = "tests/testAddNode.json"
 
 def main():
     #get info
@@ -64,6 +64,17 @@ def writeToJSON(fileName: str, name: str, long: float, lat: float, edges):
 
     # Append to the nodes list
     data["nodes"].append(new_node)
+
+    #add edges to existing nodes
+    for edge in edges:
+        for node in data["nodes"]:
+            if(edge["name"] == node["name"]):
+                newEdge = {
+                    "name": name,
+                    "cost": edge["cost"],
+                    "isIndoor": edge["isIndoor"]
+                }
+                node["edges"].append(newEdge)
 
     # Write back
     with open(fileName, "w") as f:

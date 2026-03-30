@@ -1,0 +1,55 @@
+{
+    "nodes": [
+        {
+            "name": "A",
+            "long": 1.0,
+            "lat": 2.0,
+            "edges": [
+                {
+                    "name": "B",
+                    "cost": 5.0,
+                    "isIndoor": true
+                },
+                {
+                    "name": "C",
+                    "cost": 2.0,
+                    "isIndoor": true
+                }
+            ]
+        },
+        {
+            "name": "B",
+            "long": 3.0,
+            "lat": 4.0,
+            "edges": [
+                {
+                    "name": "A",
+                    "cost": 5.0,
+                    "isIndoor": true
+                },
+                {
+                    "name": "C",
+                    "cost": 4.0,
+                    "isIndoor": true
+                }
+            ]
+        },
+        {
+            "name": "C",
+            "long": 5.0,
+            "lat": 6.0,
+            "edges": [
+                {
+                    "name": "A",
+                    "cost": 2.0,
+                    "isIndoor": true
+                },
+                {
+                    "name": "B",
+                    "cost": 4.0,
+                    "isIndoor": true
+                }
+            ]
+        }
+    ]
+}
