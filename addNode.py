@@ -1,6 +1,8 @@
-
-from main import loadJSON
+from util import setup
+from util.setup import loadJSON
 import json
+
+JSONFILE: str = "maps/mapNodes.json"
 
 def main():
     #get info
@@ -36,7 +38,7 @@ def main():
 
     #write to json
     if(correct.lower() == 'y'):
-        writeToJSON("maps/mapNodes.json", name, long, lat, edges)
+        writeToJSON(JSONFILE, name, long, lat, edges)
 
     return
 
