@@ -2,7 +2,7 @@
     "nodes": [
         {
             "name": "CS Common Room",
-            "long": 49.27721166258463, 
+            "long": 49.27721166258463,
             "lat": -122.9140499574846,
             "edges": [
                 {
@@ -12,10 +12,9 @@
                 }
             ]
         },
-
         {
             "name": "ASB Entrance",
-            "long": 49.27769028134071, 
+            "long": 49.27769028134071,
             "lat": -122.91407547509968,
             "edges": [
                 {
@@ -30,10 +29,9 @@
                 }
             ]
         },
-
         {
             "name": "AQ SE",
-            "long": 49.27827918414656, 
+            "long": 49.27827918414656,
             "lat": -122.915944640456,
             "edges": [
                 {
@@ -50,13 +48,22 @@
                     "name": "AQ NE",
                     "cost": 1,
                     "isIndoor": true
+                },
+                {
+                    "name": "SSBB",
+                    "cost": 0.5,
+                    "isIndoor": true
+                },
+                {
+                    "name": "SSBP",
+                    "cost": 0.3,
+                    "isIndoor": true
                 }
             ]
         },
-
         {
             "name": "AQ NE",
-            "long": 49.279317550398964, 
+            "long": 49.279317550398964,
             "lat": -122.91555549682886,
             "edges": [
                 {
@@ -68,13 +75,17 @@
                     "name": "AQ NW",
                     "cost": 1,
                     "isIndoor": true
+                },
+                {
+                    "name": "Saywell",
+                    "cost": 0.5,
+                    "isIndoor": true
                 }
             ]
         },
-
         {
             "name": "AQ NW",
-            "long": 49.279572595548174, 
+            "long": 49.279572595548174,
             "lat": -122.91704461488418,
             "edges": [
                 {
@@ -86,13 +97,17 @@
                     "name": "AQ SW",
                     "cost": 1,
                     "isIndoor": true
+                },
+                {
+                    "name": "SUB",
+                    "cost": 1.5,
+                    "isIndoor": false
                 }
             ]
         },
-
         {
             "name": "AQ SW",
-            "long": 49.27852174923896, 
+            "long": 49.27852174923896,
             "lat": -122.9174688452362,
             "edges": [
                 {
@@ -104,10 +119,306 @@
                     "name": "AQ SE",
                     "cost": 1,
                     "isIndoor": true
+                },
+                {
+                    "name": "SUB",
+                    "cost": 1.0,
+                    "isIndoor": true
+                },
+                {
+                    "name": "SSBC",
+                    "cost": 0.1,
+                    "isIndoor": true
+                },
+                {
+                    "name": "SSBB",
+                    "cost": 0.5,
+                    "isIndoor": true
+                }
+            ]
+        },
+        {
+            "name": "SUB",
+            "long": -122.918281,
+            "lat": 49.278551,
+            "edges": [
+                {
+                    "name": "AQ SW",
+                    "cost": 1.0,
+                    "isIndoor": true
+                },
+                {
+                    "name": "AQ NW",
+                    "cost": 1.5,
+                    "isIndoor": false
+                },
+                {
+                    "name": "MBC",
+                    "cost": 0.5,
+                    "isIndoor": true
+                },
+                {
+                    "name": "Library",
+                    "cost": 1.5,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "MBC",
+            "long": -122.9193,
+            "lat": 49.278761,
+            "edges": [
+                {
+                    "name": "SUB",
+                    "cost": 0.5,
+                    "isIndoor": true
+                },
+                {
+                    "name": "Library",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Center Bus Loop",
+                    "cost": 1.0,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "Library",
+            "long": -122.918742,
+            "lat": 49.279601,
+            "edges": [
+                {
+                    "name": "MBC",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "SUB",
+                    "cost": 1.5,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Center Bus Loop",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "WMC East",
+                    "cost": 1.5,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "Center Bus Loop",
+            "long": -122.920261,
+            "lat": 49.279504,
+            "edges": [
+                {
+                    "name": "Library",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "MBC",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "WMC East",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "LDC",
+                    "cost": 1.5,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "WMC East",
+            "long": -122.920846,
+            "lat": 49.279875,
+            "edges": [
+                {
+                    "name": "Center Bus Loop",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Library",
+                    "cost": 1.5,
+                    "isIndoor": false
+                },
+                {
+                    "name": "WMC West",
+                    "cost": 1.0,
+                    "isIndoor": true
+                },
+                {
+                    "name": "LDC",
+                    "cost": 1.0,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "WMC West",
+            "long": -122.922445,
+            "lat": 49.28012,
+            "edges": [
+                {
+                    "name": "WMC East",
+                    "cost": 1.0,
+                    "isIndoor": true
+                },
+                {
+                    "name": "LDC",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "West Parking",
+                    "cost": 0.5,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "LDC",
+            "long": -122.922219,
+            "lat": 49.279504,
+            "edges": [
+                {
+                    "name": "WMC West",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "WMC East",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Center Bus Loop",
+                    "cost": 1.5,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Dining Hall",
+                    "cost": 1.0,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "West Parking",
+            "long": -122.923421,
+            "lat": 49.280001,
+            "edges": [
+                {
+                    "name": "WMC West",
+                    "cost": 0.5,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Dining Hall",
+                    "cost": 1.0,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "Dining Hall",
+            "long": -122.924408,
+            "lat": 49.27991,
+            "edges": [
+                {
+                    "name": "West Parking",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "LDC",
+                    "cost": 1.0,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "SSBC",
+            "long": -122.917606,
+            "lat": 49.278329,
+            "edges": [
+                {
+                    "name": "AQ SW",
+                    "cost": 0.1,
+                    "isIndoor": true
+                }
+            ]
+        },
+        {
+            "name": "SSBB",
+            "long": -122.91678,
+            "lat": 49.278248,
+            "edges": [
+                {
+                    "name": "AQ SW",
+                    "cost": 0.5,
+                    "isIndoor": true
+                },
+                {
+                    "name": "AQ SE",
+                    "cost": 0.5,
+                    "isIndoor": true
+                }
+            ]
+        },
+        {
+            "name": "SSBP",
+            "long": -122.916061,
+            "lat": 49.27794,
+            "edges": [
+                {
+                    "name": "AQ SE",
+                    "cost": 0.3,
+                    "isIndoor": true
+                }
+            ]
+        },
+        {
+            "name": "Saywell",
+            "long": -122.914728,
+            "lat": 49.279389,
+            "edges": [
+                {
+                    "name": "AQ NE",
+                    "cost": 0.5,
+                    "isIndoor": true
+                },
+                {
+                    "name": "Blusson",
+                    "cost": 1.0,
+                    "isIndoor": true
+                }
+            ]
+        },
+        {
+            "name": "Blusson",
+            "long": -122.913006,
+            "lat": 49.279091,
+            "edges": [
+                {
+                    "name": "Saywell",
+                    "cost": 1.0,
+                    "isIndoor": true
                 }
             ]
         }
-
-
     ]
 }
