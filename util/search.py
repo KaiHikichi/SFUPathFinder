@@ -10,10 +10,17 @@ def A_Star(start: Node, goal: Node):
     fringe: list[FringeElement] = list()
     currentFE: FringeElement = FringeElement(start, None, 0)
 
+    visited: list[Node] = list()
+
     foundGoal: bool = False
     while not foundGoal:
+        #expand current fringe element
         #create fringe elements for all the edges
         for edge in currentFE.node.edges:
+            #ignore nodes that have already been expanded
+            if (edge.destNode in visited):
+                continue
+
             #get cost of new fringe element (cost of current, minus its h, plus the cost to get to new node, plus new h)
             newCost: float = currentFE.cost - currentFE.node.h + edge.cost + edge.destNode.h
             temp: FringeElement = FringeElement(edge.destNode, currentFE, newCost)
@@ -28,6 +35,7 @@ def A_Star(start: Node, goal: Node):
         #expand the cheapest FringeElement
         currentFE = cheapest
         fringe.remove(cheapest)
+        visited.append(cheapest.node)
 
         if currentFE.node == goal:
             foundGoal = True

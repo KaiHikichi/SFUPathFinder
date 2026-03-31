@@ -1,5 +1,6 @@
 from __future__ import annotations
 from enum import Enum
+import math
 
 class Weather(Enum):
     CLEAR = 1
@@ -51,8 +52,10 @@ class Node:
             edge.updateWeatherCosts(weatherTolerance, weatherState)
         pass
 
-    def calcHeuristic(self) -> float:
-        self.h = 0
+    def calcHeuristic(self, goal: Node):
+        dist: float = math.sqrt((pow(self.long - goal.long, 2) + pow(self.lat - goal.lat, 2)))
+        self.h = dist
+        pass
 
 
 class Edge:
@@ -67,7 +70,7 @@ class Edge:
     def __init__(self, homeNode: Node, destNode: Node, cost: float, isIndoor: bool):
         self.homeNode = homeNode
         self.destNode = destNode
-        self.cost = cost
+        self.cost = self.calcCost()
         self.isIndoor = isIndoor
         pass
 
@@ -79,6 +82,11 @@ class Edge:
         if (self.isIndoor == False):
             self.cost = self.cost + (1 - weatherTolerance) * weatherState.value
         pass
+
+    """calculate the cost of this edge based off distance between nodes"""
+    def calcCost(self) -> float:
+        dist: float = math.sqrt((pow(self.homeNode.long - self.destNode.long, 2) + pow(self.homeNode.lat - self.destNode.lat, 2)))
+        return dist
 
     def __str__(self):
         return f"{self.homeNode.name} - {self.destNode.name} : {self.cost}"

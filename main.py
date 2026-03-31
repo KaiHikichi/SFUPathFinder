@@ -17,7 +17,7 @@ def main():
     map.printMap()
 
     #find path and print it
-    (path, cost) = A_Star(map.nodes["CS Common Room"], map.nodes["AQ NW"])
+    (path, cost) = A_Star(map.nodes["Saywell"], map.nodes["Dining Hall"])
     for node in path:
         print(node)
     print(cost)
