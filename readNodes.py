@@ -47,6 +47,10 @@ def readLine(line):
 
     # Read remaining data for edges in groups of 3
     for i in range(3, len(parts), 3):
+        
+        if edge_name == "":
+            break
+
         edge_name = parts[i]
         cost = float(parts[i+1])
         isIndoor = parts[i+2].lower() == "true"
