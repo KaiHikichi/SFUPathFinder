@@ -100,6 +100,11 @@
                     "name": "Saywell",
                     "cost": 0.5,
                     "isIndoor": true
+                },
+                {
+                    "name": "EDB",
+                    "cost": 0.25,
+                    "isIndoor": true
                 }
             ]
         },
@@ -126,6 +131,11 @@
                 {
                     "name": "RCB Images Theatre",
                     "cost": 0.25,
+                    "isIndoor": true
+                },
+                {
+                    "name": "EDB",
+                    "cost": 1.0,
                     "isIndoor": true
                 }
             ]
@@ -499,6 +509,11 @@
                     "name": "AQ NW",
                     "cost": 0.25,
                     "isIndoor": true
+                },
+                {
+                    "name": "EDB",
+                    "cost": 0.75,
+                    "isIndoor": true
                 }
             ]
         },
@@ -721,6 +736,28 @@
                     "name": "ASB Entrance",
                     "cost": 0.9,
                     "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "EDB",
+            "long": -122.915589,
+            "lat": 49.279939,
+            "edges": [
+                {
+                    "name": "AQ NE",
+                    "cost": 0.25,
+                    "isIndoor": true
+                },
+                {
+                    "name": "RCB Images Theatre",
+                    "cost": 0.75,
+                    "isIndoor": true
+                },
+                {
+                    "name": "AQ NW",
+                    "cost": 1.0,
+                    "isIndoor": true
                 }
             ]
         }
