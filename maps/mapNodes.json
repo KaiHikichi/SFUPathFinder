@@ -11,7 +11,7 @@
                     "isIndoor": true
                 }
             ]
-        },  
+        },
         {
             "name": "ASB Entrance",
             "long": -122.91407547509968,
@@ -26,6 +26,26 @@
                     "name": "AQ SE",
                     "cost": 1.5,
                     "isIndoor": true
+                },
+                {
+                    "name": "Transit Exchange",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Parking East",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Parking South",
+                    "cost": 2.0,
+                    "isIndoor": true
+                },
+                {
+                    "name": "Nesters",
+                    "cost": 0.9,
+                    "isIndoor": false
                 }
             ]
         },
@@ -102,6 +122,11 @@
                     "name": "SUB",
                     "cost": 1.5,
                     "isIndoor": false
+                },
+                {
+                    "name": "RCB Images Theatre",
+                    "cost": 0.25,
+                    "isIndoor": true
                 }
             ]
         },
@@ -180,7 +205,7 @@
                     "isIndoor": false
                 },
                 {
-                    "name": "Center Bus Loop",
+                    "name": "Transportation Centre",
                     "cost": 1.0,
                     "isIndoor": false
                 }
@@ -202,7 +227,7 @@
                     "isIndoor": false
                 },
                 {
-                    "name": "Center Bus Loop",
+                    "name": "Transportation Centre",
                     "cost": 1.0,
                     "isIndoor": false
                 },
@@ -214,7 +239,7 @@
             ]
         },
         {
-            "name": "Center Bus Loop",
+            "name": "Transportation Centre",
             "long": -122.920261,
             "lat": 49.279504,
             "edges": [
@@ -246,7 +271,7 @@
             "lat": 49.279875,
             "edges": [
                 {
-                    "name": "Center Bus Loop",
+                    "name": "Transportation Centre",
                     "cost": 1.0,
                     "isIndoor": false
                 },
@@ -305,7 +330,7 @@
                     "isIndoor": false
                 },
                 {
-                    "name": "Center Bus Loop",
+                    "name": "Transportation Centre",
                     "cost": 1.5,
                     "isIndoor": false
                 },
@@ -330,6 +355,16 @@
                     "name": "Dining Hall",
                     "cost": 1.0,
                     "isIndoor": false
+                },
+                {
+                    "name": "Residence Courtyard",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Residence Shell",
+                    "cost": 0.5,
+                    "isIndoor": false
                 }
             ]
         },
@@ -346,6 +381,26 @@
                 {
                     "name": "LDC",
                     "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Residence Towers",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Residence Courtyard",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Residence Shell",
+                    "cost": 0.5,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Residence McTaggart-Cowan",
+                    "cost": 0.5,
                     "isIndoor": false
                 }
             ]
@@ -405,6 +460,11 @@
                     "name": "Blusson",
                     "cost": 1.0,
                     "isIndoor": true
+                },
+                {
+                    "name": "Parking North",
+                    "cost": 1.0,
+                    "isIndoor": false
                 }
             ]
         },
@@ -417,6 +477,250 @@
                     "name": "Saywell",
                     "cost": 1.0,
                     "isIndoor": true
+                },
+                {
+                    "name": "Parking North",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Transit Exchange",
+                    "cost": 0.5,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "RCB Images Theatre",
+            "long": -122.916851,
+            "lat": 49.279733,
+            "edges": [
+                {
+                    "name": "AQ NW",
+                    "cost": 0.25,
+                    "isIndoor": true
+                }
+            ]
+        },
+        {
+            "name": "Residence Towers",
+            "long": -122.926758,
+            "lat": 49.280047,
+            "edges": [
+                {
+                    "name": "Dining Hall",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Residence Townhouses",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Parking Residence West",
+                    "cost": 1.0,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "Residence Townhouses",
+            "long": -122.929689,
+            "lat": 49.280065,
+            "edges": [
+                {
+                    "name": "Residence Towers",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Parking Residence West",
+                    "cost": 1.0,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "Residence Courtyard",
+            "long": -122.923534,
+            "lat": 49.280336,
+            "edges": [
+                {
+                    "name": "Dining Hall",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "West Parking",
+                    "cost": 1.0,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "Residence Shell",
+            "long": -122.923947,
+            "lat": 49.279367,
+            "edges": [
+                {
+                    "name": "Dining Hall",
+                    "cost": 0.5,
+                    "isIndoor": false
+                },
+                {
+                    "name": "West Parking",
+                    "cost": 0.5,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Residence McTaggart-Cowan",
+                    "cost": 0.5,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "Residence McTaggart-Cowan",
+            "long": -122.925489,
+            "lat": 49.279172,
+            "edges": [
+                {
+                    "name": "Residence Shell",
+                    "cost": 0.5,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Dining Hall",
+                    "cost": 0.5,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "Parking Residence West",
+            "long": -122.929062,
+            "lat": 49.278433,
+            "edges": [
+                {
+                    "name": "Residence Townhouses",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Residence Towers",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Residence McTaggert-Cowan",
+                    "cost": 1.5,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "Parking North",
+            "long": -122.912974,
+            "lat": 49.28005,
+            "edges": [
+                {
+                    "name": "Blusson",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Saywell",
+                    "cost": 1.0,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "Transit Exchange",
+            "long": -122.912743,
+            "lat": 49.278587,
+            "edges": [
+                {
+                    "name": "Blusson",
+                    "cost": 0.5,
+                    "isIndoor": false
+                },
+                {
+                    "name": "ASB Entrance",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "North Parking",
+                    "cost": 0.75,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Parking East",
+                    "cost": 1.0,
+                    "isIndoor": true
+                },
+                {
+                    "name": "Nesters",
+                    "cost": 1.0,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "Parking East",
+            "long": -122.911236,
+            "lat": 49.277027,
+            "edges": [
+                {
+                    "name": "ASB Entrance",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "Transit Exchange",
+                    "cost": 1.0,
+                    "isIndoor": true
+                },
+                {
+                    "name": "Parking South",
+                    "cost": 1.0,
+                    "isIndoor": false
+                }
+            ]
+        },
+        {
+            "name": "Parking South",
+            "long": -122.912394,
+            "lat": 49.275201,
+            "edges": [
+                {
+                    "name": "Parking East",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "ASB Entrance",
+                    "cost": 2.0,
+                    "isIndoor": true
+                }
+            ]
+        },
+        {
+            "name": "Nesters",
+            "long": -122.910267,
+            "lat": 49.277876,
+            "edges": [
+                {
+                    "name": "Transit Exchange",
+                    "cost": 1.0,
+                    "isIndoor": false
+                },
+                {
+                    "name": "ASB Entrance",
+                    "cost": 0.9,
+                    "isIndoor": false
                 }
             ]
         }
