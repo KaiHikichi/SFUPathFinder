@@ -2,7 +2,7 @@ from util import setup
 from util.setup import loadJSON
 import json
 
-JSONFILE: str = "tests/testAddNode.json"
+JSONFILE: str = "maps/mapNodes.json"
 
 def main():
     #get info
@@ -17,7 +17,11 @@ def main():
         if(edgeDest.lower() == "done"): break
 
         cost: float = float(input("Cost: "))
-        isIndoor: bool = bool(input("Is indoor? (True/False): "))
+        s = input("Is indoor? (True/False): ")
+        isIndoor: bool = False
+        if(s == "True"):
+            isIndoor = True
+        
 
         edge = {
             "name": edgeDest,
