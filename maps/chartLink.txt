@@ -1,6 +1,8 @@
 This chart is to track which nodes we have mapped and their connections:
     https://lucid.app/lucidchart/b79aa892-7067-45a2-8a66-6cd5b0bd6d9a/edit?viewport_loc=-155%2C-173%2C2934%2C1466%2C0_0&invitationId=inv_854ea98a-8115-4447-92c4-208282781b8d
 
+Canva link since lucid chart is limited
+    https://canva.link/zrb34c6qm3p29q5
 
 This is for finding coords: 
     https://viewsfu.its.sfu.ca/apps/vertisee/public/
