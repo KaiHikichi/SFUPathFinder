@@ -46,14 +46,15 @@ def main():
         start = input("Start: ")
         dest = input("Dest: ")
 
-        """ 
+        
         start = "ASB Entrance"
         dest = "CS Common Room"
-        """
+       
 
-        
+        """
         start = "AQ NE"
         dest = "West Parking"
+        """
        
 
         #find path
