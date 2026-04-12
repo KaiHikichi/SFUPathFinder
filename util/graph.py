@@ -1,7 +1,6 @@
 from __future__ import annotations
 from enum import Enum
 import math
-import random
 
 class Weather(Enum):
     CLEAR = 1
@@ -54,8 +53,14 @@ class Node:
         pass
 
     def calcHeuristic(self, goal: Node):
-        dist: float = math.sqrt((pow(self.long - goal.long, 2) + pow(self.lat - goal.lat, 2)))
-        self.h = dist
+        lat1 = math.radians(self.lat)
+        lat2 = math.radians(goal.lat)
+        lon1 = math.radians(self.long)
+        lon2 = math.radians(goal.long)
+        dlat = lat2 - lat1
+        dlon = lon2 - lon1
+        a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
+        self.h = 6_371_000 * 2 * math.asin(math.sqrt(a))
         pass
 
 
@@ -80,14 +85,21 @@ class Edge:
     weatherTolerance: float between 0 and 1, 1 means user does not care about the weather
     """
     def updateWeatherCosts(self, weatherTolerance: float, weatherState: Weather):
+        # Adds up to ~50m penalty per outdoor edge depending on weather severity and tolerance
         if (self.isIndoor == False):
-            self.cost = self.cost + (1 - weatherTolerance) * weatherState.value
+            self.cost = self.cost + (1 - weatherTolerance) * (weatherState.value - 1) * 50
         pass
 
-    """calculate the cost of this edge based off distance between nodes"""
+    """calculate the cost of this edge in metres using the Haversine formula"""
     def calcCost(self) -> float:
-        dist: float = math.sqrt((pow(self.homeNode.long - self.destNode.long, 2) + pow(self.homeNode.lat - self.destNode.lat, 2)))
-        return dist
+        lat1 = math.radians(self.homeNode.lat)
+        lat2 = math.radians(self.destNode.lat)
+        lon1 = math.radians(self.homeNode.long)
+        lon2 = math.radians(self.destNode.long)
+        dlat = lat2 - lat1
+        dlon = lon2 - lon1
+        a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
+        return 6_371_000 * 2 * math.asin(math.sqrt(a))
 
     def __str__(self):
         return f"{self.homeNode.name} - {self.destNode.name} : {self.cost}"
