@@ -4,9 +4,9 @@ import math
 import random
 
 class Weather(Enum):
-    CLEAR = 1
-    RAINING = 1.25
-    SNOWY = 1.75
+    CLEAR = 0
+    RAINING = 0.25
+    SNOWY = 0.75
 
 class Node:
     """
@@ -88,7 +88,7 @@ class Edge:
     def updateWeatherCosts(self, weatherTolerance: float, weatherState: Weather):
         # Adds a penalty if an edge is outdoors with bad weather
         if (self.isIndoor == False):
-            self.cost = self.cost + (1 - weatherTolerance) * weatherState.value
+            self.cost = self.cost * (1 + (1 - weatherTolerance) * weatherState.value)
         pass
 
     """calculate the cost of this edge based off distance between nodes"""
