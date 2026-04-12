@@ -150,10 +150,11 @@ class NodeMap:
         pass
 
 class FringeElement:
-    def __init__(self, node: Node, parent: FringeElement, cost: float):
+    def __init__(self, node: Node, parent: FringeElement, cost: float, g:float):
         self.node = node
         self.parent = parent
         self.cost = cost
+        self.g = g
         pass
 
 def simulateConstruction(map: NodeMap, constructionChance: float, constructionPenalty: float):

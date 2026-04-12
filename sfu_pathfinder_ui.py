@@ -5,7 +5,7 @@ import os, sys
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
 
-from util.graph import NodeMap, Weather, simulateConstruction
+from util.graph import NodeMap, Weather, simulateConstruction, Node
 from util.setup import setUp
 from util.search import A_Star
 from util.edge_operations import estimate_time_per_edge, update_edge_costs_in_path
@@ -297,10 +297,11 @@ def find():
     start = shared_map.nodes[start_var.get()]
     goal  = shared_map.nodes[end_var.get()]
 
-    """
+    
     for node in shared_map.nodes.values():
-        node.calcHeuristic(goal)
-    """
+        node:Node
+        node.h = node.calcHeuristic(goal)
+   
     
 
     path, cost = A_Star(start, goal)

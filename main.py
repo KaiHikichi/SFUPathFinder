@@ -1,5 +1,5 @@
 from __future__ import annotations
-from util.graph import NodeMap
+from util.graph import NodeMap, Node
 from util.setup import setUp
 from util.search import A_Star
 from util.graph import Weather
@@ -62,6 +62,9 @@ def main():
         dest = "Library"
         """
        
+        for node in map.nodes.values():
+            noe: Node
+            node.h = node.calcHeuristic(map.nodes[dest])
 
         #find path
         (path, cost) = A_Star(map.nodes[start], map.nodes[dest])
