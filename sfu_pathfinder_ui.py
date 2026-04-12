@@ -230,6 +230,20 @@ summary_lbl = ctk.CTkLabel(res_hdr, text="", font=FB(12), text_color=GOLD,
                              fg_color="transparent", anchor="e")
 summary_lbl.pack(side="right", padx=16)
 
+map_btn = ctk.CTkButton(
+    res_hdr,
+    text="VIEW ON MAP",
+    command=lambda: show_map(last_path),
+    state="disabled",
+    text_color=WHITE,
+    height=28,
+    corner_radius=6,
+    fg_color="#97b7ec",
+    hover_color="#5491f3",
+    font=FB(10)
+)
+map_btn.pack(side="right", padx=(0, 8))
+
 steps_frame = ctk.CTkFrame(res_outer, fg_color="transparent")
 steps_frame.pack(fill="x")
 steps_frame.grid_columnconfigure(0, weight=1)
@@ -296,7 +310,6 @@ def find():
 
     start = shared_map.nodes[start_var.get()]
     goal  = shared_map.nodes[end_var.get()]
-
     
     for node in shared_map.nodes.values():
         node:Node
@@ -314,7 +327,10 @@ def find():
         ctk.CTkLabel(steps_frame, text="No path found.", font=FR(14),
                      text_color=DIM, fg_color="transparent").grid(row=0, column=0, pady=40)
         summary_lbl.configure(text="")
+        map_btn.configure(state="disabled", fg_color="#97b7ec")
         return
+    else:
+        map_btn.configure(state="normal", fg_color=BLUE, hover_color="#5491f3", text_color=WHITE)
 
     est_mins = cost * METERS_PER_DEGREE / METERS_PER_MIN
     summary_lbl.configure(text=f"~{est_mins:.1f} min  ·  {len(path)} stops")
@@ -354,5 +370,64 @@ def find():
                          text_color=BORDER, fg_color="transparent").grid(row=i*2+1, column=0, pady=0)
 
     show_feedback()
+
+
+# ── Map display ─────────────────────────────────────────────────────────────
+
+# Bounds of the SFU map to help normalize lat/lon of nodes to pixel coordinates 
+MAP_TOP_LAT = 49.281381
+MAP_BOTTOM_LAT = 49.275921
+MAP_LEFT_LON = -122.932051
+MAP_RIGHT_LON = -122.911654
+
+def show_map(path):
+    # Define tk window for map display
+    map_window = tk.Toplevel(root)
+    map_window.title(f"Route Map ({path[0].name} → {path[-1].name})")
+    map_window.geometry("1852x757")
+
+    # Load map image and convert it to a Tkinter-compatible format
+    img = Image.open("maps/baseMap.png")
+    tk_img = ImageTk.PhotoImage(img)
+
+    # Create a canvas to display / fit the map in the tk window and allow drawing
+    canvas = tk.Canvas(map_window, width=img.width, height=img.height)
+    canvas.pack(fill="both", expand=True)
+
+    # Display the map image on the canvas
+    canvas.create_image(0, 0, anchor="nw", image=tk_img)
+
+    # Keep a reference to the image to keep it rendered on the canvas
+    canvas.image = tk_img 
+
+    # Function to convert lat/lon coordinates to x,y pixel coordinates on the map image
+    def latlon_to_xy(lat, lon):
+        x = (lon - MAP_LEFT_LON) / (MAP_RIGHT_LON - MAP_LEFT_LON) * img.width
+        y = (MAP_TOP_LAT - lat) / (MAP_TOP_LAT - MAP_BOTTOM_LAT) * img.height
+        return x, y
+
+    # Draw the path of nodes on the canvas
+    for i in range(len(path)-1):
+        n1, n2 = path[i], path[i+1]
+        x1, y1 = latlon_to_xy(n1.lat, n1.long)
+        x2, y2 = latlon_to_xy(n2.lat, n2.long)
+        canvas.create_line(x1, y1, x2, y2, fill=BLUE, width=4)
+
+    # Draw a green circle to represent start node
+    node = path[0]
+    x, y = latlon_to_xy(node.lat, node.long)
+    canvas.create_oval(x-5, y-5, x+5, y+5, fill=GREEN)
+
+    # Draw blue circles for intermediate nodes
+    for i in range(1, len(path)-1):
+        node = path[i]
+        x, y = latlon_to_xy(node.lat, node.long)
+        canvas.create_oval(x-5, y-5, x+5, y+5, fill=BLUE)
+    
+    # Draw a red circle to represent destination node
+    node = path[len(path)-1]
+    x, y = latlon_to_xy(node.lat, node.long)
+    canvas.create_oval(x-5, y-5, x+5, y+5, fill=RED)
+
 
 root.mainloop()
