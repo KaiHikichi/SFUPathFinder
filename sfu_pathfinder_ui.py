@@ -186,7 +186,7 @@ chance_var = ctk.DoubleVar(value=0.001)
 chance_lbl = ctk.CTkLabel(chance_row, text="0.1%", font=FB(12), text_color=GOLD,
                             fg_color="transparent", width=44)
 chance_lbl.pack(side="right")
-ctk.CTkSlider(chance_row, from_=0, to=0.1, variable=chance_var,
+ctk.CTkSlider(chance_row, from_=0, to=1, variable=chance_var,
               progress_color=GOLD, button_color=WHITE, button_hover_color=GOLD,
               fg_color=BG_INPUT,
               command=lambda v: chance_lbl.configure(text=f"{float(v)*100:.1f}%")).pack(
