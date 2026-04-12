@@ -232,8 +232,6 @@ def find():
         node.calcHeuristic(goal)
     path, _ = A_Star(start, goal)
 
-    show_map(path)
-
     clear_results()
 
     if not path:
@@ -294,6 +292,9 @@ def find():
                                      font=ctk.CTkFont(size=16), text_color=BORDER,
                                      fg_color="transparent")
             connector.grid(row=i*2+1, column=0, pady=0)
+        
+        # Render path on map
+        show_map(path)
 
 # ── Map display ─────────────────────────────────────────────────────────────
 
