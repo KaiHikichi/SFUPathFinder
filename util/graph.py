@@ -1,6 +1,7 @@
 from __future__ import annotations
 from enum import Enum
 import math
+import random
 
 class Weather(Enum):
     CLEAR = 1
