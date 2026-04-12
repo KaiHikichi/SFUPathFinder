@@ -301,8 +301,6 @@ def find():
     for node in shared_map.nodes.values():
         node:Node
         node.h = node.calcHeuristic(goal)
-   
-    
 
     path, cost = A_Star(start, goal)
     last_path = path
