@@ -160,7 +160,7 @@ def simulateConstruction(map: NodeMap, constructionChance: float, constructionPe
     if it is randomly chosen to be under construction multiply its cost by constructionPenalty along with its matching back edge
     """
 
-    for node in map.nodes.values:
+    for node in map.nodes.values():
         node: Node
         for edge in node.edges:
             edge: Edge

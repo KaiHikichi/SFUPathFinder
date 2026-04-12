@@ -1,8 +1,9 @@
 from __future__ import annotations
-from util import graph
-from util.graph import NodeMap, Node, Edge, FringeElement
+from util.graph import NodeMap
 from util.setup import setUp
 from util.search import A_Star
+from util.graph import Weather
+from util.graph import simulateConstruction
 
 
 
@@ -12,12 +13,16 @@ def main():
     map: NodeMap = NodeMap()
     setUp(map, "maps/mapNodes.json")
 
-    #print the map
-    print()
-    map.printMap()
+    #update based on wether
+    map.updateWeatherCosts(0.5, Weather.RAINING)
 
-    #find path and print it
+    #simulate construction
+    simulateConstruction(map, 0.01, 2)
+
+    #find path
     (path, cost) = A_Star(map.nodes["Saywell"], map.nodes["Dining Hall"])
+
+    #print the path
     for node in path:
         print(node)
     print(cost)
