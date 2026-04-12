@@ -1,6 +1,7 @@
 import customtkinter as ctk
 import tkinter as tk
 import os, sys, math
+from PIL import Image, ImageTk
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
@@ -8,6 +9,7 @@ sys.path.insert(0, ROOT)
 from util.graph import NodeMap, Weather
 from util.setup import setUp
 from util.search import A_Star
+
 
 MAP_JSON = os.path.join(ROOT, "maps", "mapNodes.json")
 
@@ -230,6 +232,8 @@ def find():
         node.calcHeuristic(goal)
     path, _ = A_Star(start, goal)
 
+    show_map(path)
+
     clear_results()
 
     if not path:
@@ -290,5 +294,63 @@ def find():
                                      font=ctk.CTkFont(size=16), text_color=BORDER,
                                      fg_color="transparent")
             connector.grid(row=i*2+1, column=0, pady=0)
+
+# ── Map display ─────────────────────────────────────────────────────────────
+
+# Bounds of the SFU map to help normalize lat/lon of nodes to pixel coordinates 
+MAP_TOP_LAT = 49.281381
+MAP_BOTTOM_LAT = 49.275921
+MAP_LEFT_LON = -122.932051
+MAP_RIGHT_LON = -122.911654
+
+def show_map(path):
+    # Define tk window for map display
+    map_window = tk.Toplevel(root)
+    map_window.title("Route Map")
+    map_window.geometry("1852x757")
+
+    # Load map image and convert it to a Tkinter-compatible format
+    img = Image.open("maps/baseMap.png")
+    tk_img = ImageTk.PhotoImage(img)
+
+    # Create a canvas to display / fit the map in the tk window and allow drawing
+    canvas = tk.Canvas(map_window, width=img.width, height=img.height)
+    canvas.pack(fill="both", expand=True)
+
+    # Display the map image on the canvas
+    canvas.create_image(0, 0, anchor="nw", image=tk_img)
+
+    # Keep a reference to the image to keep it rendered on the canvas
+    canvas.image = tk_img 
+
+    # Function to convert lat/lon coordinates to x,y pixel coordinates on the map image
+    def latlon_to_xy(lat, lon):
+        x = (lon - MAP_LEFT_LON) / (MAP_RIGHT_LON - MAP_LEFT_LON) * img.width
+        y = (MAP_TOP_LAT - lat) / (MAP_TOP_LAT - MAP_BOTTOM_LAT) * img.height
+        return x, y
+
+    # Draw the path of nodes on the canvas
+    for i in range(len(path)-1):
+        n1, n2 = path[i], path[i+1]
+        x1, y1 = latlon_to_xy(n1.lat, n1.long)
+        x2, y2 = latlon_to_xy(n2.lat, n2.long)
+        canvas.create_line(x1, y1, x2, y2, fill=BLUE, width=4)
+
+    # Draw a green circle to represent start node
+    node = path[0]
+    x, y = latlon_to_xy(node.lat, node.long)
+    canvas.create_oval(x-5, y-5, x+5, y+5, fill=GREEN)
+
+    # Draw blue circles for intermediate nodes
+    for i in range(1, len(path)-1):
+        node = path[i]
+        x, y = latlon_to_xy(node.lat, node.long)
+        canvas.create_oval(x-5, y-5, x+5, y+5, fill=BLUE)
+    
+    # Draw a red circle to represent destination node
+    node = path[len(path)-1]
+    x, y = latlon_to_xy(node.lat, node.long)
+    canvas.create_oval(x-5, y-5, x+5, y+5, fill=RED)
+
 
 root.mainloop()
