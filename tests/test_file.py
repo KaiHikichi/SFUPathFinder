@@ -1,8 +1,10 @@
-from util import graph
-from util.graph import NodeMap, Weather
+from util.graph import NodeMap, Weather, Node
 from util.setup import setUp
 from util.search import A_Star
 from util.graph import simulateConstruction
+from util.edge_operations import update_edge_costs_in_path, estimate_time_per_edge
+
+METERS_PER_DEGREE = 111139 
 
 def test_A_Star():
     #setup
@@ -72,6 +74,30 @@ def test_construction_1():
     assert cost == 5 * 2
 
     pass
+
+def test_dynamic_edge_weighting_1():
+
+    #setup
+    map: NodeMap = NodeMap()
+    setUp(map, "tests/testEdgeOps.json")
+
+    (path, cost) = A_Star(map.nodes["A"], map.nodes["B"])
+
+    assert cost == 0.0004792985106955507
+    print(f"1: {cost * METERS_PER_DEGREE}")
+
+    times = estimate_time_per_edge(path, 3, cost)
+    update_edge_costs_in_path(path, times)
+
+    (path, cost) = A_Star(map.nodes["A"], map.nodes["B"])
+
+    assert cost == 0.0006606257534372025
+    print(f"2: {cost * METERS_PER_DEGREE}")
+
+
+    pass
+
+
 
 
 

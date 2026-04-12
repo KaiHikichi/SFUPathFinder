@@ -1,8 +1,10 @@
 import json
 import math
-from main import Node, Edge, NodeMap, loadNodes, loadJSON
+from util.graph import Node, Edge
+
 
 LEARNING_RATE = 0.1
+METERS_PER_MIN = 85
 
 
 
@@ -41,7 +43,7 @@ def update_edge_costs_in_path(finalPath: list[Node], time: list[float]):
         if edge is not None: 
             # Update the cost of the edge based on the time taken
             new_cost = update_edge_cost_by_speed(edge, time[i])
-            print(f"Updating cost of edge from {node.name} to {next_node.name} from {edge.cost} to {new_cost}")
+            #print(f"Updating cost of edge from {node.name} to {next_node.name} from {edge.cost} to {new_cost}")
             edge.cost = new_cost
 
     return
@@ -56,7 +58,7 @@ def estimate_time(edge: Edge):
     distance: float = coords_to_meters(edge.homeNode.lat, edge.homeNode.long, edge.destNode.lat, edge.destNode.long)
 
     #avg human walking speed in meters per minute
-    avgWalkingSpeed: float = 85
+    avgWalkingSpeed: float = METERS_PER_MIN
 
     return distance / avgWalkingSpeed
 

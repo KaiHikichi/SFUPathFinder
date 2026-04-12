@@ -4,8 +4,10 @@ from util.setup import setUp
 from util.search import A_Star
 from util.graph import Weather
 from util.graph import simulateConstruction
+from util.edge_operations import METERS_PER_MIN
 
 METERS_PER_DEGREE = 111139 
+
 
 
 
@@ -29,7 +31,7 @@ def main():
     #print the path
     for node in path:
         print(node)
-    print(cost * METERS_PER_DEGREE)
+    print(cost * METERS_PER_DEGREE / METERS_PER_MIN)
 
 
     pass
