@@ -37,30 +37,14 @@ def main():
         map.updateWeatherCosts(float(weatherTol), weather)
 
         #construction chance and penalty can be set below
-        constructionChance = 1
-        constructionPenalty = 10
+        constructionChance = input("Construction chance (0 - 1.0): ")
+        constructionPenalty = input("Construction penalty: ")
         #simulate construction
-        simulateConstruction(map, constructionChance, constructionPenalty)
+        simulateConstruction(map, float(constructionChance), float(constructionPenalty))
 
         #get start and dest
         start = input("Start: ")
-        dest = input("Dest: ")
-
-        
-        start = "ASB Entrance"
-        dest = "CS Common Room"
-       
-
-        """
-        start = "AQ NE"
-        dest = "West Parking"
-
-        """
-
-        """ 
-        start = "SUB"
-        dest = "Library"
-        """
+        dest = input("Dest: ")        
        
         for node in map.nodes.values():
             noe: Node
