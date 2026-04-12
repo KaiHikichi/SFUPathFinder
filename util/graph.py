@@ -162,23 +162,19 @@ class FringeElement:
         pass
 
 def simulateConstruction(map: NodeMap, constructionChance: float, constructionPenalty: float):
-    """
-    each edge is given a chance constructionChance, of being under construction
-    if it is randomly chosen to be under construction multiply its cost by constructionPenalty along with its matching back edge
-    """
+    visited: set = set()
 
     for node in map.nodes.values():
-        node: Node
         for edge in node.edges:
-            edge: Edge
-            if(random.random() <= constructionChance):
+            if edge in visited:
+                continue
+            
+            if random.random() <= constructionChance:
                 edge.cost = edge.cost * constructionPenalty
 
-                #find matching edge adn update it
                 for backEdge in edge.destNode.edges:
-                    backEdge: Edge
                     if backEdge.destNode == edge.homeNode:
                         backEdge.cost = edge.cost
-                
-
-    pass
+                        visited.add(backEdge)
+            
+            visited.add(edge)
