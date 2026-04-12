@@ -86,21 +86,15 @@ class Edge:
     weatherTolerance: float between 0 and 1, 1 means user does not care about the weather
     """
     def updateWeatherCosts(self, weatherTolerance: float, weatherState: Weather):
-        # Adds up to ~50m penalty per outdoor edge depending on weather severity and tolerance
+        # Adds a penalty if an edge is outdoors with bad weather
         if (self.isIndoor == False):
-            self.cost = self.cost + (1 - weatherTolerance) * (weatherState.value - 1) * 50
+            self.cost = self.cost + (1 - weatherTolerance) * weatherState.value
         pass
 
-    """calculate the cost of this edge in metres using the Haversine formula"""
+    """calculate the cost of this edge based off distance between nodes"""
     def calcCost(self) -> float:
-        lat1 = math.radians(self.homeNode.lat)
-        lat2 = math.radians(self.destNode.lat)
-        lon1 = math.radians(self.homeNode.long)
-        lon2 = math.radians(self.destNode.long)
-        dlat = lat2 - lat1
-        dlon = lon2 - lon1
-        a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
-        return 6_371_000 * 2 * math.asin(math.sqrt(a))
+        dist: float = math.sqrt((pow(self.homeNode.long - self.destNode.long, 2) + pow(self.homeNode.lat - self.destNode.lat, 2)))
+        return dist
 
     def __str__(self):
         return f"{self.homeNode.name} - {self.destNode.name} : {self.cost}"
