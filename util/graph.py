@@ -77,7 +77,8 @@ class Edge:
     def __init__(self, homeNode: Node, destNode: Node, cost: float, isIndoor: bool):
         self.homeNode = homeNode
         self.destNode = destNode
-        self.cost = self.calcCost()
+        self.trueCost = self.calcCost()
+        self.cost = self.trueCost
         self.isIndoor = isIndoor
         pass
 
@@ -88,7 +89,7 @@ class Edge:
     def updateWeatherCosts(self, weatherTolerance: float, weatherState: Weather):
         # Adds a penalty if an edge is outdoors with bad weather
         if (self.isIndoor == False):
-            self.cost = self.cost * (1 + (1 - weatherTolerance) * weatherState.value)
+            self.cost = self.trueCost * (1 + (1 - weatherTolerance) * weatherState.value)
         pass
 
     """calculate the cost of this edge based off distance between nodes"""
