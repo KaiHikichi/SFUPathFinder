@@ -20,7 +20,7 @@ def main():
     simulateConstruction(map, 0.01, 2)
 
     #find path
-    (path, cost) = A_Star(map.nodes["Saywell"], map.nodes["Dining Hall"])
+    (path, cost) = A_Star(map.nodes["AQ SW"], map.nodes["ASB Entrance"])
 
     #print the path
     for node in path:

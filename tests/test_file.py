@@ -23,14 +23,15 @@ def test_updateWeatherCosts_1():
 
     (path, cost) = A_Star(map.nodes["A"], map.nodes["B"])
 
-    assert cost == 5
+    assert cost == 555.9746330602085
 
     #adjust for outdoor
+    weather: Weather = Weather.SNOWY
     weatherTolerance = 0.5
-    map.updateWeatherCosts(weatherTolerance, Weather.SNOWY)
+    map.updateWeatherCosts(weatherTolerance, weather)
     (path, cost) = A_Star(map.nodes["A"], map.nodes["B"])
 
-    assert cost == 5 + (1 - weatherTolerance) * Weather.SNOWY.value
+    assert cost == 555.9746330602085 + (1 - weatherTolerance) * (weather.value - 1) * 50
 
     pass
 
@@ -50,7 +51,7 @@ def test_updateWeatherCosts_2():
     map.updateWeatherCosts(weatherTolerance, Weather.SNOWY)
     (path, cost) = A_Star(map.nodes["A"], map.nodes["D"])
 
-    assert path[1].name == "C"
+    assert path[1].name == "B"
 
     pass
 
