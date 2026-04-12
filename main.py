@@ -54,15 +54,19 @@ def main():
         (path, cost) = A_Star(map.nodes[start], map.nodes[dest])
 
         #print the path
+        print("\nPath ===================")
         for node in path:
             print(node)
+        print("\nEstimated time walk:")
         print(cost * METERS_PER_DEGREE / METERS_PER_MIN)
+        print()
 
         #get how long it took for user to walk path
         #update the edge costs to learn different walking speeds
         time = input("How long did it take to walk in minutes: ")
         times = estimate_time_per_edge(path, float(time), cost)
-        update_edge_costs_in_path(path, times, cost * METERS_PER_DEGREE / METERS_PER_MIN)
+        expectedTimes = estimate_time_per_edge(path, cost  * METERS_PER_DEGREE / METERS_PER_MIN, cost)
+        update_edge_costs_in_path(path, times, expectedTimes)
 
 
     pass

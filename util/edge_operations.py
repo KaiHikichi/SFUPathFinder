@@ -23,12 +23,12 @@ def update_edge_cost_by_speed(edge: Edge, time: float, estTime: float):
     return edge.trueCost * (1 + LEARNING_RATE * ((time / estTime) - 1))
 
 
-def update_edge_costs_in_path(finalPath: list[Node], time: list[float], estTime):
+def update_edge_costs_in_path(finalPath: list[Node], time: list[float], expectedTimes: list[float]):
     """
     Given a path (List of Nodes) 
     and the time taken to traverse each edge (List of floats), 
     update the cost of each edge in the path based on the time taken.
-    estTime is time in minutes
+    estTime is time in minutes to walk whole path
     """
     
     for i in range(len(finalPath) - 1):
@@ -38,7 +38,7 @@ def update_edge_costs_in_path(finalPath: list[Node], time: list[float], estTime)
         edge = next((e for e in node.edges if e.destNode == next_node), None)
 
         if edge is not None:
-            new_cost = update_edge_cost_by_speed(edge, time[i], estTime)
+            new_cost = update_edge_cost_by_speed(edge, time[i], expectedTimes[i])
             edge.cost = new_cost
             edge.trueCost = new_cost
 

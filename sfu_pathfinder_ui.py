@@ -284,7 +284,8 @@ def show_feedback():
             time_entry.configure(border_color=RED)
             return
         times = estimate_time_per_edge(last_path, t, last_cost)
-        update_edge_costs_in_path(last_path, times, last_cost  * METERS_PER_DEGREE / METERS_PER_MIN)
+        expectedTimes = estimate_time_per_edge(last_path, last_cost  * METERS_PER_DEGREE / METERS_PER_MIN, last_cost)
+        update_edge_costs_in_path(last_path, times, expectedTimes)
         feedback_card.pack_forget()
         submitted_lbl.configure(text=f"✓ Costs updated with {t:.1f} min walk")
         submitted_lbl.pack(padx=20, pady=(0, 12))
