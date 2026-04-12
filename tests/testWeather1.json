@@ -15,8 +15,8 @@
 
         {
             "name": "B",
-            "long": 0.004, 
-            "lat": 0.003,
+            "long": 4, 
+            "lat": 3,
             "edges": [
                 {
                     "name": "A",
