@@ -54,15 +54,8 @@ class Node:
         pass
 
     def calcHeuristic(self, goal: Node):
-        lat1 = math.radians(self.lat)
-        lat2 = math.radians(goal.lat)
-        lon1 = math.radians(self.long)
-        lon2 = math.radians(goal.long)
-        dlat = lat2 - lat1
-        dlon = lon2 - lon1
-        a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
-        self.h = 6_371_000 * 2 * math.asin(math.sqrt(a))
-        pass
+        dist: float = math.sqrt((pow(self.long - goal.long, 2) + pow(self.lat - goal.lat, 2)))
+        return dist
 
 
 class Edge:
