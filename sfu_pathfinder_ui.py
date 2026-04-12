@@ -385,10 +385,11 @@ def show_map(path):
     # Define tk window for map display
     map_window = tk.Toplevel(root)
     map_window.title(f"Route Map ({path[0].name} → {path[-1].name})")
-    map_window.geometry("1852x757")
+    map_window.geometry("900x368")
 
     # Load map image and convert it to a Tkinter-compatible format
     img = Image.open("maps/baseMap.png")
+    img.thumbnail((900,900))
     tk_img = ImageTk.PhotoImage(img)
 
     # Create a canvas to display / fit the map in the tk window and allow drawing
