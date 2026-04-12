@@ -81,6 +81,7 @@ class Edge:
     """
     def updateWeatherCosts(self, weatherTolerance: float, weatherState: Weather):
         # Adds a penalty if an edge is outdoors with bad weather
+        self.cost = self.trueCost
         if (self.isIndoor == False):
             self.cost = self.trueCost * (1 + (1 - weatherTolerance) * weatherState.value)
         pass

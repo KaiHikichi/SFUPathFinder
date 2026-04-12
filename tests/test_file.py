@@ -3,6 +3,7 @@ from util.setup import setUp
 from util.search import A_Star
 from util.graph import simulateConstruction
 from util.edge_operations import update_edge_costs_in_path, estimate_time_per_edge
+from util.edge_operations import METERS_PER_MIN
 
 METERS_PER_DEGREE = 111139 
 
@@ -87,7 +88,7 @@ def test_dynamic_edge_weighting_1():
     print(f"1: {cost * METERS_PER_DEGREE}")
 
     times = estimate_time_per_edge(path, 3, cost)
-    update_edge_costs_in_path(path, times)
+    update_edge_costs_in_path(path, times, cost * METERS_PER_DEGREE / METERS_PER_MIN)
 
     (path, cost) = A_Star(map.nodes["A"], map.nodes["B"])
 

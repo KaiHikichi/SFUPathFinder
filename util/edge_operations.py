@@ -8,13 +8,9 @@ METERS_PER_MIN = 85
 
 
 
-def update_edge_cost_by_speed(edge: Edge, time: float): 
+def update_edge_cost_by_speed(edge: Edge, time: float, estTime: float): 
     # Arriving 1 minute earlier or later does not change cost, change this value as needed
     threshold = 0.1
-
-    
-
-    estTime: float = estimate_time(edge)
 
     if abs(estTime - time) < threshold:
         return edge.trueCost
@@ -27,11 +23,12 @@ def update_edge_cost_by_speed(edge: Edge, time: float):
     return edge.trueCost * (1 + LEARNING_RATE * ((time / estTime) - 1))
 
 
-def update_edge_costs_in_path(finalPath: list[Node], time: list[float]):
+def update_edge_costs_in_path(finalPath: list[Node], time: list[float], estTime):
     """
     Given a path (List of Nodes) 
     and the time taken to traverse each edge (List of floats), 
     update the cost of each edge in the path based on the time taken.
+    estTime is time in minutes
     """
     
     for i in range(len(finalPath) - 1):
@@ -41,7 +38,7 @@ def update_edge_costs_in_path(finalPath: list[Node], time: list[float]):
         edge = next((e for e in node.edges if e.destNode == next_node), None)
 
         if edge is not None:
-            new_cost = update_edge_cost_by_speed(edge, time[i])
+            new_cost = update_edge_cost_by_speed(edge, time[i], estTime)
             edge.cost = new_cost
             edge.trueCost = new_cost
 

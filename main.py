@@ -37,8 +37,8 @@ def main():
         map.updateWeatherCosts(float(weatherTol), weather)
 
         #construction chance and penalty can be set below
-        constructionChance = 0.001
-        constructionPenalty = 2
+        constructionChance = 1
+        constructionPenalty = 10
         #simulate construction
         simulateConstruction(map, constructionChance, constructionPenalty)
 
@@ -54,6 +54,12 @@ def main():
         """
         start = "AQ NE"
         dest = "West Parking"
+
+        """
+
+        """ 
+        start = "SUB"
+        dest = "Library"
         """
        
 
@@ -69,7 +75,7 @@ def main():
         #update the edge costs to learn different walking speeds
         time = input("How long did it take to walk in minutes: ")
         times = estimate_time_per_edge(path, float(time), cost)
-        update_edge_costs_in_path(path, times)
+        update_edge_costs_in_path(path, times, cost * METERS_PER_DEGREE / METERS_PER_MIN)
 
 
     pass

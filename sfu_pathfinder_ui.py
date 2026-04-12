@@ -270,7 +270,7 @@ def show_feedback():
             time_entry.configure(border_color=RED)
             return
         times = estimate_time_per_edge(last_path, t, last_cost)
-        update_edge_costs_in_path(last_path, times)
+        update_edge_costs_in_path(last_path, times, last_cost  * METERS_PER_DEGREE / METERS_PER_MIN)
         feedback_card.pack_forget()
         submitted_lbl.configure(text=f"✓ Costs updated with {t:.1f} min walk")
         submitted_lbl.pack(padx=20, pady=(0, 12))
@@ -297,8 +297,11 @@ def find():
     start = shared_map.nodes[start_var.get()]
     goal  = shared_map.nodes[end_var.get()]
 
+    """
     for node in shared_map.nodes.values():
         node.calcHeuristic(goal)
+    """
+    
 
     path, cost = A_Star(start, goal)
     last_path = path
