@@ -293,8 +293,8 @@ def find():
                                      fg_color="transparent")
             connector.grid(row=i*2+1, column=0, pady=0)
         
-        # Render path on map
-        show_map(path)
+    # Render path on map
+    show_map(path)
 
 # ── Map display ─────────────────────────────────────────────────────────────
 
