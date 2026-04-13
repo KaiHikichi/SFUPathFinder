@@ -80,7 +80,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    
+    # UNCOMMENT THIS IF YOU DON'T WANT UI
+    # main()
 
-    # IF YOU DONT WANT MAIN TO OPEN UI, COMMENT THIS OUT
+    # UNCOMMENT THIS IF YOU WANT UI
     import sfu_pathfinder_ui 
