@@ -39,4 +39,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()      
+    main()
+
+    # IF YOU DONT WANT MAIN TO OPEN UI, COMMENT THIS OUT
+    import sfu_pathfinder_ui 
