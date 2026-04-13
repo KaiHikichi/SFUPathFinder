@@ -4,9 +4,9 @@ import math
 import random
 
 class Weather(Enum):
-    CLEAR = 1
-    RAINING = 1.25
-    SNOWY = 1.75
+    CLEAR = 0
+    RAINING = 0.25
+    SNOWY = 0.75
 
 class Node:
     """
@@ -54,15 +54,8 @@ class Node:
         pass
 
     def calcHeuristic(self, goal: Node):
-        lat1 = math.radians(self.lat)
-        lat2 = math.radians(goal.lat)
-        lon1 = math.radians(self.long)
-        lon2 = math.radians(goal.long)
-        dlat = lat2 - lat1
-        dlon = lon2 - lon1
-        a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
-        self.h = 6_371_000 * 2 * math.asin(math.sqrt(a))
-        pass
+        dist: float = math.sqrt((pow(self.long - goal.long, 2) + pow(self.lat - goal.lat, 2)))
+        return dist
 
 
 class Edge:
@@ -77,7 +70,8 @@ class Edge:
     def __init__(self, homeNode: Node, destNode: Node, cost: float, isIndoor: bool):
         self.homeNode = homeNode
         self.destNode = destNode
-        self.cost = self.calcCost()
+        self.trueCost = self.calcCost()
+        self.cost = self.trueCost
         self.isIndoor = isIndoor
         pass
 
@@ -87,8 +81,9 @@ class Edge:
     """
     def updateWeatherCosts(self, weatherTolerance: float, weatherState: Weather):
         # Adds a penalty if an edge is outdoors with bad weather
+        self.cost = self.trueCost
         if (self.isIndoor == False):
-            self.cost = self.cost + (1 - weatherTolerance) * weatherState.value
+            self.cost = self.trueCost * (1 + (1 - weatherTolerance) * weatherState.value)
         pass
 
     """calculate the cost of this edge based off distance between nodes"""
@@ -155,30 +150,27 @@ class NodeMap:
         pass
 
 class FringeElement:
-    def __init__(self, node: Node, parent: FringeElement, cost: float):
+    def __init__(self, node: Node, parent: FringeElement, cost: float, g:float):
         self.node = node
         self.parent = parent
         self.cost = cost
+        self.g = g
         pass
 
 def simulateConstruction(map: NodeMap, constructionChance: float, constructionPenalty: float):
-    """
-    each edge is given a chance constructionChance, of being under construction
-    if it is randomly chosen to be under construction multiply its cost by constructionPenalty along with its matching back edge
-    """
+    visited: set = set()
 
     for node in map.nodes.values():
-        node: Node
         for edge in node.edges:
-            edge: Edge
-            if(random.random() <= constructionChance):
+            if edge in visited:
+                continue
+            
+            if random.random() <= constructionChance:
                 edge.cost = edge.cost * constructionPenalty
 
-                #find matching edge adn update it
                 for backEdge in edge.destNode.edges:
-                    backEdge: Edge
                     if backEdge.destNode == edge.homeNode:
                         backEdge.cost = edge.cost
-                
-
-    pass
+                        visited.add(backEdge)
+            
+            visited.add(edge)

@@ -1,48 +1,52 @@
 import json
 import math
-from main import Node, Edge, NodeMap, loadNodes, loadJSON
+from util.graph import Node, Edge
+
 
 LEARNING_RATE = 0.1
+METERS_PER_MIN = 85
 
 
 
-def update_edge_cost_by_speed(edge: Edge, time: float): 
+def update_edge_cost_by_speed(edge: Edge, time: float, estTime: float): 
     # Arriving 1 minute earlier or later does not change cost, change this value as needed
-    threshold = 1 
-
-    estTime: float = estimate_time(edge)
+    threshold = 0.1
 
     if abs(estTime - time) < threshold:
-        return edge.cost
+        return edge.trueCost
     
     # If arriving earlier than expected, reduce cost
     if time < estTime:
-        return edge.cost * (1 + LEARNING_RATE * ((time / estTime) - 1))
+        return edge.trueCost * (1 + LEARNING_RATE * ((time / estTime) - 1))
     
     # If arriving later than expected, increase cost
-    return edge.cost * (1 + LEARNING_RATE * ((time / estTime) - 1))
+    return edge.trueCost * (1 + LEARNING_RATE * ((time / estTime) - 1))
 
 
-def update_edge_costs_in_path(finalPath: list[Node], time: list[float]):
+def update_edge_costs_in_path(finalPath: list[Node], time: list[float], expectedTimes: list[float]):
     """
     Given a path (List of Nodes) 
     and the time taken to traverse each edge (List of floats), 
     update the cost of each edge in the path based on the time taken.
+    estTime is time in minutes to walk whole path
     """
     
     for i in range(len(finalPath) - 1):
         node = finalPath[i]
         next_node = finalPath[i + 1]
 
-        # Find the edge connecting node to next_node
         edge = next((e for e in node.edges if e.destNode == next_node), None)
 
-        # If there is an edge between node and next_node
-        if edge is not None: 
-            # Update the cost of the edge based on the time taken
-            new_cost = update_edge_cost_by_speed(edge, time[i])
-            print(f"Updating cost of edge from {node.name} to {next_node.name} from {edge.cost} to {new_cost}")
+        if edge is not None:
+            new_cost = update_edge_cost_by_speed(edge, time[i], expectedTimes[i])
             edge.cost = new_cost
+            edge.trueCost = new_cost
+
+            # update back edge too
+            back_edge = next((e for e in next_node.edges if e.destNode == node), None)
+            if back_edge is not None:
+                back_edge.cost = new_cost
+                back_edge.trueCost = new_cost
 
     return
 
@@ -56,7 +60,7 @@ def estimate_time(edge: Edge):
     distance: float = coords_to_meters(edge.homeNode.lat, edge.homeNode.long, edge.destNode.lat, edge.destNode.long)
 
     #avg human walking speed in meters per minute
-    avgWalkingSpeed: float = 85
+    avgWalkingSpeed: float = METERS_PER_MIN
 
     return distance / avgWalkingSpeed
 

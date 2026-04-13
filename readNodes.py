@@ -1,5 +1,4 @@
 import json
-from util.setup import loadJSON
 
 # Read nodes from a CSV file and write to JSON file for pathfinding.
 # Allows convenience of using Excel to create nodes and edges, and then easily importing them into our program.
@@ -7,21 +6,17 @@ from util.setup import loadJSON
 def main():
     # Take in CSV file name and JSON file name from user
     fileName = input("Please enter the name of the CSV file: ")
-    try:
-        file = open(fileName, "r")
-    except FileNotFoundError:
-        raise FileNotFoundError
+    file = open(fileName, "r")
     
     jsonFileName = input("Please enter the name of the JSON file to write to: ")
     
     # Load existing data from JSON file
-    data = loadJSON(jsonFileName)
+    data = json.load(open(jsonFileName, "r"))
     
     # Dissect each line of the CSV file and create nodes and edges accordingly
     for line in file:
         name, long, lat, edges = readLine(line.strip())
         createNode(data, name, long, lat, edges)
-
 
     # Write back to JSON file
     with open(jsonFileName, "w") as f:

@@ -8,31 +8,26 @@ def A_Star(start: Node, goal: Node):
     cost: float = 0
 
     fringe: list[FringeElement] = list()
-    currentFE: FringeElement = FringeElement(start, None, 0)
+    currentFE: FringeElement = FringeElement(start, None, 0, 0)
 
     visited: list[Node] = list()
 
     foundGoal: bool = False
     while not foundGoal:
-        #expand current fringe element
-        #create fringe elements for all the edges
         for edge in currentFE.node.edges:
-            #ignore nodes that have already been expanded
             if (edge.destNode in visited):
                 continue
 
-            #get cost of new fringe element (cost of current, minus its h, plus the cost to get to new node, plus new h)
-            newCost: float = currentFE.cost - currentFE.node.h + edge.cost + edge.destNode.h
-            temp: FringeElement = FringeElement(edge.destNode, currentFE, newCost)
+            newG: float = currentFE.g + edge.cost
+            newCost: float = newG + edge.destNode.h
+            temp: FringeElement = FringeElement(edge.destNode, currentFE, newCost, newG)
             fringe.append(temp)
 
-        #find the path with lowest cost
         cheapest: FringeElement = fringe[0]
         for FE in fringe:
             if FE.cost < cheapest.cost:
                 cheapest = FE
-        
-        #expand the cheapest FringeElement
+
         currentFE = cheapest
         fringe.remove(cheapest)
         visited.append(cheapest.node)
@@ -40,9 +35,8 @@ def A_Star(start: Node, goal: Node):
         if currentFE.node == goal:
             foundGoal = True
 
-    #get final path
     finalPath.append(buildPath(finalPath, currentFE))
-    cost = currentFE.cost
+    cost = currentFE.g
 
     return finalPath, cost
 
